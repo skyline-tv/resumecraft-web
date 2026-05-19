@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- SEO -->
+  <title>ResumeCraft — Professional Resume Builder App</title>
+  <meta name="description" content="Create professional ATS-friendly resumes instantly with ResumeCraft. Build modern resumes and export high-quality PDFs directly from your phone." />
+  <meta name="keywords" content="resume builder, ATS resume, AI resume, PDF resume, job seeker, professional resume, mobile resume app" />
+  <meta name="author" content="SkyLine Tech Ventures" />
+  <link rel="canonical" href="https://resumecraft.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://resumecraft.app/" />
+  <meta property="og:title" content="ResumeCraft — Professional Resume Builder App" />
+  <meta property="og:description" content="Create professional ATS-friendly resumes instantly with ResumeCraft. Build modern resumes and export high-quality PDFs directly from your phone." />
+  <meta property="og:image" content="https://resumecraft.app/og-image.png" />
+  <meta property="og:site_name" content="ResumeCraft" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://resumecraft.app/" />
+  <meta name="twitter:title" content="ResumeCraft — Professional Resume Builder App" />
+  <meta name="twitter:description" content="Create professional ATS-friendly resumes instantly with ResumeCraft. Build modern resumes and export high-quality PDFs directly from your phone." />
+  <meta name="twitter:image" content="https://resumecraft.app/og-image.png" />
+
+  <!-- Favicon & App Icon -->
+  <link rel="icon" type="image/png" href="logo.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="logo.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="logo.png" sizes="180x180" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: "#3B82F6",
+            card: "#111111",
+            muted: "#71717A",
+          },
+          fontFamily: {
+            heading: ["Poppins", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-black text-white font-body antialiased overflow-x-hidden">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <img src="logo.png" alt="ResumeCraft" class="logo-img logo-img-lg shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-shadow" width="48" height="48" fetchpriority="high" />
+        <span class="font-heading font-bold text-xl tracking-tight">Resume<span class="text-accent">Craft</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#features" class="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Features</a>
+        <a href="#showcase" class="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Showcase</a>
+        <a href="#why" class="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Why Us</a>
+        <a href="#download" class="nav-link text-sm text-zinc-400 hover:text-white transition-colors">Download</a>
+      </div>
+
+      <!-- CTA -->
+      <div class="hidden md:block">
+        <a href="#download" class="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-15A2.5 2.5 0 015.5 3h13A2.5 2.5 0 0121 5.5v15a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 20.5zm7.5-2.5l5-4-5-4v8z"/></svg>
+          Join Testing
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="menu-btn" class="md:hidden p-2 text-zinc-400 hover:text-white transition-colors" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] md:hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="document.getElementById('close-menu').click()"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-card border-l border-white/10 p-8 flex flex-col">
+      <div class="flex justify-between items-center mb-10">
+        <div class="flex items-center gap-2">
+          <img src="logo.png" alt="" class="logo-img w-8 h-8" width="32" height="32" aria-hidden="true" />
+          <span class="font-heading font-bold text-lg">Menu</span>
+        </div>
+        <button id="close-menu" class="p-2 text-zinc-400 hover:text-white" aria-label="Close menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-6">
+        <a href="#features" class="mobile-nav-link text-lg text-zinc-300 hover:text-white transition-colors">Features</a>
+        <a href="#showcase" class="mobile-nav-link text-lg text-zinc-300 hover:text-white transition-colors">Showcase</a>
+        <a href="#why" class="mobile-nav-link text-lg text-zinc-300 hover:text-white transition-colors">Why Us</a>
+        <a href="#download" class="mobile-nav-link text-lg text-zinc-300 hover:text-white transition-colors">Download</a>
+      </nav>
+      <a href="#download" class="mobile-nav-link mt-auto btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold">
+        Join Testing
+      </a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==================== HERO ==================== -->
+    <section class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
+      <!-- Background glows -->
+      <div class="gradient-glow gradient-glow-blue w-[600px] h-[600px] -top-32 -right-32 absolute"></div>
+      <div class="gradient-glow gradient-glow-purple w-[500px] h-[500px] bottom-0 -left-32 absolute"></div>
+
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <!-- Copy -->
+          <div data-aos="fade-right">
+            <div class="inline-flex flex-wrap items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-zinc-400 mb-8">
+              <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+              <span>5 Professional Templates</span>
+              <span class="badge-testing">Play Store Testing</span>
+            </div>
+            <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+              Build Stunning Professional Resumes in <span class="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent">Minutes</span>
+            </h1>
+            <p class="text-lg text-zinc-400 leading-relaxed max-w-xl mb-10">
+              Choose from <strong class="text-zinc-300">5 ATS-friendly templates</strong>, customize your resume, and export high-quality PDFs instantly — right from your phone.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#download" class="btn-primary inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-white">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-15A2.5 2.5 0 015.5 3h13A2.5 2.5 0 0121 5.5v15a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 20.5zm7.5-2.5l5-4-5-4v8z"/></svg>
+                Join Play Store Testing
+              </a>
+              <a href="#features" class="btn-secondary inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-white">
+                Explore Features
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </a>
+            </div>
+            <p class="mt-8 text-sm text-muted">Available now on Google Play — open testing · 5 professional templates</p>
+          </div>
+
+          <!-- App Mockup -->
+          <div class="relative flex justify-center lg:justify-end" data-aos="fade-left" data-aos-delay="200">
+            <div class="relative animate-float">
+              <div class="phone-mockup w-[280px] sm:w-[300px] aspect-[9/19] p-3">
+                <div class="phone-notch"></div>
+                <div class="w-full h-full rounded-[2rem] overflow-hidden bg-card">
+                  <!-- Mock app UI -->
+                  <div class="h-full flex flex-col p-4">
+                    <div class="flex items-center justify-between mb-4">
+                      <span class="font-heading text-xs font-semibold">ResumeCraft</span>
+                      <div class="w-6 h-6 rounded-full bg-accent/20"></div>
+                    </div>
+                    <div class="flex-1 space-y-3">
+                      <div class="h-16 rounded-xl bg-gradient-to-br from-accent/30 to-blue-900/30 border border-accent/20 p-3">
+                        <div class="w-8 h-8 rounded-full bg-white/20 mb-2"></div>
+                        <div class="h-2 w-24 bg-white/30 rounded"></div>
+                        <div class="h-1.5 w-16 bg-white/15 rounded mt-1"></div>
+                      </div>
+                      <div class="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Sections</div>
+                      <div class="space-y-2">
+                        <div class="h-8 rounded-lg bg-white/5 border border-white/5 flex items-center px-3 gap-2">
+                          <div class="w-3 h-3 rounded bg-accent/40"></div>
+                          <div class="h-1.5 flex-1 bg-white/20 rounded"></div>
+                        </div>
+                        <div class="h-8 rounded-lg bg-white/5 border border-white/5 flex items-center px-3 gap-2">
+                          <div class="w-3 h-3 rounded bg-white/20"></div>
+                          <div class="h-1.5 flex-1 bg-white/15 rounded"></div>
+                        </div>
+                        <div class="h-8 rounded-lg bg-white/5 border border-white/5 flex items-center px-3 gap-2">
+                          <div class="w-3 h-3 rounded bg-white/20"></div>
+                          <div class="h-1.5 flex-1 bg-white/15 rounded"></div>
+                        </div>
+                      </div>
+                      <div class="mt-auto">
+                        <div class="h-9 rounded-full bg-accent flex items-center justify-center text-[10px] font-semibold">Export PDF</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Floating badge -->
+              <div class="absolute -left-8 top-1/4 glass-card px-4 py-3 rounded-2xl text-xs font-medium shadow-xl animate-float-delayed hidden sm:block">
+                <span class="text-accent font-semibold">✓</span> ATS Optimized
+              </div>
+              <div class="absolute -right-6 bottom-1/4 glass-card px-4 py-3 rounded-2xl text-xs font-medium shadow-xl hidden sm:block">
+                <span class="text-green-400 font-semibold">AI</span> Powered
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- ==================== FEATURES ==================== -->
+    <section id="features" class="py-24 lg:py-32 relative">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+          <p class="text-accent text-sm font-semibold uppercase tracking-widest mb-4">Features</p>
+          <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">Everything You Need to Land Your Dream Job</h2>
+          <p class="text-zinc-400 text-lg">Powerful tools designed for modern job seekers — simple, fast, and professional.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Feature cards -->
+          <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="0">
+            <div class="feature-icon mb-5">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-lg mb-2">ATS Friendly Templates</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">Templates optimized to pass applicant tracking systems.</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="feature-icon mb-5">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-lg mb-2">AI Resume Assistance</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">Smart suggestions to improve your resume content instantly.</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-icon mb-5">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-lg mb-2">Easy Resume Editor</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">Intuitive editing with real-time preview on your device.</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="feature-icon mb-5">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-lg mb-2">One Tap PDF Export</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">Export crisp, high-quality PDFs ready to send to recruiters.</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-icon mb-5">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-lg mb-2">Mobile Optimized</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">Built for phones — create resumes anywhere, anytime.</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="feature-icon mb-5">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-lg mb-2">5 Resume Designs</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">Five hand-crafted, ATS-friendly templates ready to use.</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-icon mb-5">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-lg mb-2">Professional Layouts</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">Clean, recruiter-approved designs that make you stand out.</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="350">
+            <div class="feature-icon mb-5">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-lg mb-2">Fast &amp; Lightweight</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">Lightning-fast performance with minimal storage footprint.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== APP SHOWCASE ==================== -->
+    <section id="showcase" class="py-24 lg:py-32 relative overflow-hidden">
+      <div class="gradient-glow gradient-glow-blue w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute opacity-30"></div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+        <div class="text-center max-w-2xl mx-auto mb-20" data-aos="fade-up">
+          <p class="text-accent text-sm font-semibold uppercase tracking-widest mb-4">App Showcase</p>
+          <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">Beautiful by Design</h2>
+          <p class="text-zinc-400 text-lg">A premium mobile experience crafted for effortless resume building.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 items-end">
+          <!-- Phone 1 -->
+          <div class="flex justify-center" data-aos="fade-up" data-aos-delay="0">
+            <div class="phone-mockup w-[220px] aspect-[9/19] p-2.5 opacity-80 scale-90">
+              <div class="phone-notch scale-75"></div>
+              <div class="w-full h-full rounded-[1.75rem] overflow-hidden screenshot-inner flex flex-col p-4">
+                <div class="text-[9px] text-zinc-500 mb-1 flex justify-between"><span>Templates</span><span class="text-accent font-semibold">5</span></div>
+                <div class="grid grid-cols-2 gap-2 flex-1">
+                  <div class="rounded-lg bg-white/5 border border-white/10 p-2">
+                    <div class="h-12 bg-gradient-to-b from-white/10 to-transparent rounded mb-1"></div>
+                    <div class="h-1 w-full bg-white/20 rounded"></div>
+                  </div>
+                  <div class="rounded-lg bg-accent/10 border border-accent/30 p-2 ring-1 ring-accent/40">
+                    <div class="h-12 bg-gradient-to-b from-accent/20 to-transparent rounded mb-1"></div>
+                    <div class="h-1 w-full bg-accent/40 rounded"></div>
+                  </div>
+                  <div class="rounded-lg bg-white/5 border border-white/10 p-2">
+                    <div class="h-12 bg-gradient-to-b from-white/10 to-transparent rounded mb-1"></div>
+                    <div class="h-1 w-full bg-white/20 rounded"></div>
+                  </div>
+                  <div class="rounded-lg bg-white/5 border border-white/10 p-2">
+                    <div class="h-12 bg-gradient-to-b from-white/10 to-transparent rounded mb-1"></div>
+                    <div class="h-1 w-full bg-white/20 rounded"></div>
+                  </div>
+                  <div class="rounded-lg bg-white/5 border border-white/10 p-2 col-span-2">
+                    <div class="h-10 bg-gradient-to-b from-white/10 to-transparent rounded mb-1"></div>
+                    <div class="h-1 w-2/3 mx-auto bg-white/20 rounded"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone 2 - Center featured -->
+          <div class="flex justify-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="phone-mockup w-[260px] aspect-[9/19] p-3 relative z-10">
+              <div class="phone-notch"></div>
+              <div class="w-full h-full rounded-[2rem] overflow-hidden bg-card flex flex-col p-5">
+                <div class="text-center mb-4">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-blue-700 mx-auto mb-2"></div>
+                  <div class="h-2 w-20 bg-white/30 rounded mx-auto mb-1"></div>
+                  <div class="h-1.5 w-28 bg-white/15 rounded mx-auto"></div>
+                </div>
+                <div class="text-[9px] text-zinc-500 uppercase tracking-wider mb-2">Experience</div>
+                <div class="space-y-2 flex-1">
+                  <div class="p-2 rounded-lg bg-white/5 border border-white/5">
+                    <div class="h-1.5 w-16 bg-white/25 rounded mb-1"></div>
+                    <div class="h-1 w-full bg-white/10 rounded"></div>
+                  </div>
+                  <div class="p-2 rounded-lg bg-white/5 border border-white/5">
+                    <div class="h-1.5 w-20 bg-white/25 rounded mb-1"></div>
+                    <div class="h-1 w-full bg-white/10 rounded"></div>
+                  </div>
+                  <div class="p-2 rounded-lg bg-white/5 border border-white/5">
+                    <div class="h-1.5 w-14 bg-white/25 rounded mb-1"></div>
+                    <div class="h-1 w-full bg-white/10 rounded"></div>
+                  </div>
+                </div>
+                <div class="h-8 rounded-full bg-accent/90 flex items-center justify-center text-[9px] font-bold mt-3">Preview Resume</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone 3 -->
+          <div class="flex justify-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="phone-mockup w-[220px] aspect-[9/19] p-2.5 opacity-80 scale-90">
+              <div class="phone-notch scale-75"></div>
+              <div class="w-full h-full rounded-[1.75rem] overflow-hidden screenshot-inner flex flex-col p-4">
+                <div class="text-[9px] text-zinc-500 mb-3">Export</div>
+                <div class="flex-1 flex flex-col items-center justify-center gap-3">
+                  <div class="w-16 h-20 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                  </div>
+                  <div class="h-2 w-24 bg-white/20 rounded"></div>
+                  <div class="h-6 w-28 rounded-full bg-accent/80 flex items-center justify-center text-[8px] font-semibold">Download PDF</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- ==================== WHY RESUMECRAFT ==================== -->
+    <section id="why" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div data-aos="fade-right">
+            <p class="text-accent text-sm font-semibold uppercase tracking-widest mb-4">Why ResumeCraft</p>
+            <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">Built for the Way You Job Hunt Today</h2>
+            <p class="text-zinc-400 text-lg mb-10 leading-relaxed">
+              ResumeCraft is a modern AI-powered resume builder designed to help students, professionals, freelancers, and job seekers create stunning resumes quickly and easily.
+            </p>
+            <ul class="space-y-5">
+              <li class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="0">
+                <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
+                  <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <div>
+                  <h4 class="font-heading font-semibold mb-1">Designed for Modern Job Seekers</h4>
+                  <p class="text-sm text-zinc-400">Tailored for students, freshers, professionals, and freelancers.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="50">
+                <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
+                  <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <div>
+                  <h4 class="font-heading font-semibold mb-1">Recruiter-Friendly Resumes</h4>
+                  <p class="text-sm text-zinc-400">Layouts that recruiters love — clean, scannable, and professional.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
+                  <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <div>
+                  <h4 class="font-heading font-semibold mb-1">Easy to Use</h4>
+                  <p class="text-sm text-zinc-400">No design skills needed — build a resume in minutes.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="150">
+                <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
+                  <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <div>
+                  <h4 class="font-heading font-semibold mb-1">Optimized for ATS Systems</h4>
+                  <p class="text-sm text-zinc-400">Increase your chances of landing interviews with ATS-ready formats.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="relative" data-aos="fade-left">
+            <div class="glass-card rounded-3xl p-8 lg:p-10">
+              <div class="grid grid-cols-2 gap-6">
+                <div class="text-center p-6 rounded-2xl bg-white/5 border border-white/5">
+                  <div class="font-heading text-4xl font-bold text-accent mb-2">5</div>
+                  <div class="text-sm text-zinc-400">Templates</div>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-white/5 border border-white/5">
+                  <div class="font-heading text-4xl font-bold text-accent mb-2">1-Tap</div>
+                  <div class="text-sm text-zinc-400">PDF Export</div>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-white/5 border border-white/5">
+                  <div class="font-heading text-4xl font-bold text-accent mb-2">AI</div>
+                  <div class="text-sm text-zinc-400">Assistance</div>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-white/5 border border-white/5">
+                  <div class="font-heading text-4xl font-bold text-accent mb-2">100%</div>
+                  <div class="text-sm text-zinc-400">Mobile Ready</div>
+                </div>
+              </div>
+              <p class="mt-8 text-center text-sm text-zinc-500 leading-relaxed">
+                Pick from 5 beautiful ATS-friendly templates, customize your information, and export high-quality PDFs directly from your phone.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== DOWNLOAD CTA ==================== -->
+    <section id="download" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="cta-gradient rounded-3xl border border-white/10 p-10 sm:p-16 lg:p-20 text-center relative" data-aos="zoom-in">
+          <div class="relative z-10">
+            <span class="badge-testing mb-6 inline-flex">Now in Google Play Open Testing</span>
+            <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">Join Play Store Testing</h2>
+            <p class="text-zinc-400 text-lg max-w-xl mx-auto mb-10">
+              Try ResumeCraft with <strong class="text-zinc-300">5 professional templates</strong>. Install via Google Play open testing and help us shape the app before public launch.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
+              <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer" class="play-badge inline-flex items-center gap-3 bg-black border border-accent/30 rounded-2xl px-6 py-3.5 hover:border-accent/50 transition-all">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3.609 1.814L13.792 12 3.61 22.186a1.205 1.205 0 01-1.24-.216 1.205 1.205 0 01-.37-.96V2.97c0-.384.146-.74.37-.96a1.205 1.205 0 011.24-.196zM14.5 12.707l2.302 2.302-10.437 6.033a1.205 1.205 0 01-.548.133l8.683-8.468zM14.5 11.293L5.817 2.825a1.205 1.205 0 01.548.133l10.437 6.033L14.5 11.293zm1.206-.707l2.804 1.623c.735.425.735 1.474 0 1.899l-2.804 1.623-2.648-2.648 2.648-2.497z"/>
+                </svg>
+                <div class="text-left">
+                  <div class="text-[10px] text-zinc-400 uppercase tracking-wide">Get it on</div>
+                  <div class="text-lg font-semibold leading-tight">Google Play</div>
+                  <div class="text-[10px] text-accent font-medium mt-0.5">Open Testing · 5 Templates</div>
+                </div>
+              </a>
+
+              <div class="inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl px-6 py-3.5 opacity-60 cursor-not-allowed">
+                <svg class="w-8 h-8 text-zinc-400" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <div class="text-left">
+                  <div class="text-[10px] text-zinc-500 uppercase tracking-wide">Coming Soon</div>
+                  <div class="text-lg font-semibold leading-tight text-zinc-400">App Store</div>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-sm text-muted">Free during testing · 5 templates · No account required to start</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 py-16">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <!-- Brand -->
+        <div class="lg:col-span-1">
+          <a href="#" class="flex items-center gap-3 mb-4">
+            <img src="logo.png" alt="ResumeCraft" class="logo-img w-9 h-9" width="36" height="36" />
+            <span class="font-heading font-bold text-lg">ResumeCraft</span>
+          </a>
+          <p class="text-sm text-zinc-400 leading-relaxed">Craft Your Perfect Resume. Built by SkyLine Tech Ventures.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-heading font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#features" class="text-zinc-400 hover:text-white transition-colors">Features</a></li>
+            <li><a href="#showcase" class="text-zinc-400 hover:text-white transition-colors">Showcase</a></li>
+            <li><a href="#why" class="text-zinc-400 hover:text-white transition-colors">Why Us</a></li>
+            <li><a href="#download" class="text-zinc-400 hover:text-white transition-colors">Download</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h4 class="font-heading font-semibold mb-4">Legal</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="privacy.html" class="text-zinc-400 hover:text-white transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="text-zinc-400 hover:text-white transition-colors">Terms of Service</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="font-heading font-semibold mb-4">Contact</h4>
+          <ul class="space-y-3 text-sm">
+            <li>
+              <a href="mailto:info@skylinetv.in" class="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                info@skylinetv.in
+              </a>
+            </li>
+            <li>
+              <a href="tel:+919673129769" class="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                +91 96731 29769
+              </a>
+            </li>
+            <li>
+              <a href="https://www.skylinetv.in" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                www.skylinetv.in
+              </a>
+            </li>
+            <li class="text-zinc-400">SkyLine Tech Ventures</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-divider mb-8"></div>
+      <p class="text-center text-sm text-muted">© 2026 SkyLine Tech Ventures. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
